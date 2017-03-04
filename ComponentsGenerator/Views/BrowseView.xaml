@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComponentsGenerator.Views"
         mc:Ignorable="d"
-        Title="BrowseView" Height="190" Width="550"
+        Title="Components Generator" Height="190" Width="550"
         MinHeight="190" MinWidth="380">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
