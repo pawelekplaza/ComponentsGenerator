@@ -100,11 +100,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Serialization\ComponentGroup.cs" />
+    <Compile Include="Serialization\ComponentElement.cs" />
+    <Compile Include="Serialization\ComponentGroupElement.cs" />
     <Compile Include="Serialization\DirectoryElement.cs" />
-    <Compile Include="Serialization\FileComponent.cs" />
+    <Compile Include="Serialization\FileElement.cs" />
+    <Compile Include="Serialization\FragmentElement.cs" />
     <Compile Include="Serialization\Wix.cs" />
-    <Compile Include="Serialization\Wxs.cs" />
+    <Compile Include="Utils\Working.cs" />
     <Compile Include="ViewModels\BrowseViewModel.cs" />
     <Compile Include="Views\BrowseView.xaml.cs">
       <DependentUpon>BrowseView.xaml</DependentUpon>

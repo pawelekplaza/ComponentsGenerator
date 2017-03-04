@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ComponentsGenerator.Serialization
 {
-    public class Wxs
+    public class FragmentElement
     {
-        public DirectoryElement Directory { get; set; }
-        public FileComponent File { get; set; }
+        [XmlElement("ComponentGroup")]
+        public ComponentGroupElement ComponentGroup { get; set; }
+
     }
 }
