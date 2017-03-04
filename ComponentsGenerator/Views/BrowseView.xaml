@@ -1,0 +1,45 @@
+﻿<Window x:Class="ComponentsGenerator.Views.BrowseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComponentsGenerator.Views"
+        mc:Ignorable="d"
+        Title="BrowseView" Height="160" Width="380"
+        MinHeight="120" MinWidth="380">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Select SolutionDir:" Margin="10,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="SolutionDirPathTextBox" Grid.Column="1" Text="{Binding SolutionDirPath}" Margin="5,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Height="20" />
+            <Button x:Name="BrowseSolutionButton" Grid.Column="2" Content="Browse" Command="{Binding BrowseForSolutiondir}" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="85" />
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Select INSTALLDIR:" Margin="10,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="InstallDirPathTextBox" Grid.Column="1" Text="{Binding InstallDirPath}" Margin="5,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Height="20" />
+            <Button x:Name="BrowseInstallButton" Grid.Column="2" Content="Browse" Command="{Binding BrowseForInstalldir}" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="85" />
+
+        </Grid>
+
+        <Button x:Name="GenerateXmlButton" Grid.Row="2" Content="Gererate XML" Command="{Binding GenerateXML}" Margin="5,5,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="85" />
+    </Grid>
+</Window>
