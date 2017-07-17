@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -57,6 +58,12 @@ namespace ComponentsGenerator.Utils
             }
 
             return sb.ToString();
+        }
+
+        public static string RemoveIllegalCharacters(string str)
+        {
+            var x = Regex.Replace(RemoveBlanks(str), @"[^a-zA-Z0-9.]", "_");
+            return x;
         }
     }
 }

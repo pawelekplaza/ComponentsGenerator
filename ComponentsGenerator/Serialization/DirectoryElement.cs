@@ -14,5 +14,8 @@ namespace ComponentsGenerator.Serialization
 
         [XmlAttribute]
         public string Name { get; set; }
+        
+        [XmlElement("Directory")]
+        public DirectoryElement Directory { get; set; }
     }
 }

@@ -9,8 +9,11 @@ namespace ComponentsGenerator.Serialization
 {
     public class FragmentElement
     {
+        [XmlElement("Directory")]
+        public DirectoryElement Directory { get; set; }
+
         [XmlElement("ComponentGroup")]
-        public ComponentGroupElement ComponentGroup { get; set; }
+        public ComponentGroupElement ComponentGroup { get; set; }        
 
     }
 }

@@ -10,6 +10,6 @@ namespace ComponentsGenerator.Serialization
     public class Wix
     {
         [XmlElement("Fragment")]
-        public FragmentElement Fragment { get; set; }
+        public FragmentElement Fragment { get; set; }        
     }
 }

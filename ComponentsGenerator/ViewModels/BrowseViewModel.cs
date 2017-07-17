@@ -80,6 +80,7 @@ namespace ComponentsGenerator.ViewModels
 
                 var model = new Wix { Fragment = new FragmentElement() };
                 CreateWixComponents(model, filesTree);
+                CreateDirectories(model, directoryTree);
 
                 var serializer = new XmlSerializer(model.GetType());
                 using (var file = new FileStream("Components.wxs", FileMode.Create, FileAccess.Write))
@@ -119,8 +120,8 @@ namespace ComponentsGenerator.ViewModels
                 }
                 return false;
             }
-        }
-        
+        }        
+
         private bool ValidatePaths()
         {
             if (Directory.Exists(SolutionDirPath) == false)
@@ -155,22 +156,21 @@ namespace ComponentsGenerator.ViewModels
                 var components = model.Fragment.ComponentGroup.Components;
                 foreach (var filePath in filesTree)
                 {
-                    currentFilePath = filePath;
                     var i = components.Count + 1;
                     var count = i.ToString(format);
                     var fileName = Path.GetFileName(filePath);
                     var componentDirectory = Working.GetSubDirPath(InstallDirPath, filePath);
-                    componentDirectory = componentDirectory.Substring(0, componentDirectory.Length - fileName.Length - 1);
+                    componentDirectory = componentDirectory.Substring(0, componentDirectory.Length - fileName.Length - 1).Replace('\\', '_');
                     var component = new ComponentElement
                     {
-                        Id = Working.RemoveBlanks($"IDC_{ fileName }_{ count }"),
+                        Id = Working.RemoveIllegalCharacters($"IDC_{ fileName }_{ count }"),
                         Directory = Working.RemoveBlanks($"IDD_{ componentDirectory }"),
                         Guid = "*"
                     };
 
                     var file = new FileElement
                     {
-                        Id = Working.RemoveBlanks($"IDF_{ fileName }_{ count }"),
+                        Id = Working.RemoveIllegalCharacters($"IDF_{ fileName }_{ count }"),
                         Name = Working.RemoveBlanks(fileName),
                         DiskId = "1",
                         Source = $"$(var.SolutionDir){ Working.GetSubDirPath(SolutionDirPath, filePath) }",
@@ -186,6 +186,11 @@ namespace ComponentsGenerator.ViewModels
                 var message = "Exception thrown in CreateWixComponents()\n";
                 throw new Exception(message, ex);
             }
+        }
+
+        private void CreateDirectories(Wix model, List<string> directoryTree)
+        {
+            //model.Fragment.Directory = new DirectoryElement();
         }
     }
 }
