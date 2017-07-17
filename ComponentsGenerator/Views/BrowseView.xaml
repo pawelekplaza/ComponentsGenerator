@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Text="Select source files folder in solution directory:" Margin="10,10,10,0" VerticalAlignment="Top" />
+            <TextBlock Text="Select solution directory:" Margin="10,10,10,0" VerticalAlignment="Top" />
             <TextBox x:Name="SolutionDirPathTextBox" Text="{Binding SolutionDirPath}" Margin="10,0,5,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="Auto" Height="20" />
             <Button x:Name="BrowseSolutionButton" Grid.Column="1" Content="Browse" Command="{Binding BrowseForSolutiondir}" Margin="5,0,5,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" BorderThickness="2" />
 
@@ -32,7 +32,7 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Select INSTALLDIR folder:" Margin="10,10,10,0" VerticalAlignment="Top" />
+            <TextBlock Text="Select source files folder inside solution directory:" Margin="10,10,10,0" VerticalAlignment="Top" />
             <TextBox x:Name="InstallDirPathTextBox" Text="{Binding InstallDirPath}" Margin="10,0,5,10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Width="Auto" Height="20" />
             <Button x:Name="BrowseInstallButton" Grid.Column="1" Content="Browse" Command="{Binding BrowseForInstalldir}" Margin="5,0,5,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" BorderThickness="2" />
 

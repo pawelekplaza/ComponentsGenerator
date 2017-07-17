@@ -16,6 +16,6 @@ namespace ComponentsGenerator.Serialization
         public string Name { get; set; }
         
         [XmlElement("Directory")]
-        public DirectoryElement Directory { get; set; }
+        public List<DirectoryElement> Directories { get; set; }
     }
 }

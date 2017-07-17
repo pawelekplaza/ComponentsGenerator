@@ -75,12 +75,11 @@ namespace ComponentsGenerator.ViewModels
         {            
             try
             {
-                var filesTree = Directory.EnumerateFiles(SolutionDirPath, "*", SearchOption.AllDirectories).ToList();
-                var directoryTree = Directory.EnumerateDirectories(InstallDirPath, "*", SearchOption.AllDirectories).ToList();
+                var filesTree = Directory.EnumerateFiles(InstallDirPath, "*", SearchOption.AllDirectories).ToList();
 
                 var model = new Wix { Fragment = new FragmentElement() };
                 CreateWixComponents(model, filesTree);
-                CreateDirectories(model, directoryTree);
+                CreateDirectories(model);
 
                 var serializer = new XmlSerializer(model.GetType());
                 using (var file = new FileStream("Components.wxs", FileMode.Create, FileAccess.Write))
@@ -173,7 +172,7 @@ namespace ComponentsGenerator.ViewModels
                         Id = Working.RemoveIllegalCharacters($"IDF_{ fileName }_{ count }"),
                         Name = Working.RemoveBlanks(fileName),
                         DiskId = "1",
-                        Source = $"$(var.SolutionDir){ Working.GetSubDirPath(SolutionDirPath, filePath) }",
+                        Source = $"$(var.SolutionDir){ Working.GetSubDirPath(InstallDirPath, filePath) }",
                         KeyPath = "yes"
                     };
 
@@ -188,9 +187,30 @@ namespace ComponentsGenerator.ViewModels
             }
         }
 
-        private void CreateDirectories(Wix model, List<string> directoryTree)
+        private void CreateDirectories(Wix model)
         {
-            //model.Fragment.Directory = new DirectoryElement();
+            var dir = new DirectoryInfo(InstallDirPath);
+            model.Fragment.Directories = new List<DirectoryElement>
+            {
+                CreateSubDir(dir)
+            };
+        }
+
+        private DirectoryElement CreateSubDir(DirectoryInfo dir)
+        {
+            var dirElement = new DirectoryElement
+            {
+                Id = $"IDD_{ Working.RemoveIllegalCharacters(dir.FullName.Substring(SolutionDirPath.Length + 1)) }",
+                Name = dir.Name,
+                Directories = new List<DirectoryElement>()
+            };
+            
+            foreach (var subDir in dir.GetDirectories())
+            {
+                dirElement.Directories.Add(CreateSubDir(subDir));
+            }
+
+            return dirElement;
         }
     }
 }
