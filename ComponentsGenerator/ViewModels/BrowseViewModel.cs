@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace ComponentsGenerator.ViewModels
@@ -18,7 +19,7 @@ namespace ComponentsGenerator.ViewModels
     {
         private string currentFilePath = "";
 
-        private string installDirPath;    
+        private string installDirPath;
         public string InstallDirPath
         {
             get { return installDirPath; }
@@ -55,20 +56,22 @@ namespace ComponentsGenerator.ViewModels
             });
         }
 
-        public RelayCommand BrowseForSolutiondir { get; set; }
-        public RelayCommand BrowseForInstalldir { get; set; }
-        public RelayCommand GenerateXML { get; set; }
+        public ICommand BrowseForSolutiondir { get; private set; }
+        public ICommand BrowseForInstalldir { get; private set; }
+        public ICommand GenerateXML { get; private set; }
 
         private string BrowseForDirectory(string currentPath)
         {
-            var dialog = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
+            var dialog = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog
+            {
+                IsFolderPicker = true
+            };
             var result = dialog.ShowDialog();
 
             if (result == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Cancel)
                 return currentPath;
 
-            return dialog.FileName;            
+            return dialog.FileName;
         }
 
         private bool SerializeXml()
