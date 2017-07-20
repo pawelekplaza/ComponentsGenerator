@@ -201,9 +201,10 @@ namespace ComponentsGenerator.ViewModels
 
         private DirectoryElement CreateSubDir(DirectoryInfo dir)
         {
+            var pathFromSourceDirectory = Working.GetSubDirPath(InstallDirPath, dir.FullName);
             var dirElement = new DirectoryElement
             {
-                Id = $"IDD_{ Working.RemoveIllegalCharacters(dir.FullName.Substring(SolutionDirPath.Length + 1)) }",
+                Id = $"IDD_{ Working.RemoveIllegalCharacters(pathFromSourceDirectory) }",
                 Name = dir.Name,
                 Directories = new List<DirectoryElement>()
             };
