@@ -33,6 +33,14 @@ namespace ComponentsGenerator.ViewModels
             set { solutionDirPath = value; RaisePropertyChanged("SolutionDirPath"); }
         }
 
+        private bool shouldPrepareX64Components;
+        public bool ShouldPrepareX64Components
+        {
+            get { return shouldPrepareX64Components; }
+            set { shouldPrepareX64Components = value; RaisePropertyChanged("ShouldPrepareX64Components"); }
+        }
+
+
 
         public BrowseViewModel()
         {
@@ -151,7 +159,7 @@ namespace ComponentsGenerator.ViewModels
         {
             try
             {
-                model.Fragment.ComponentGroup = new ComponentGroupElement { Id = $"{ Working.RemoveBlanks(InstallDirPath.Substring(InstallDirPath.LastIndexOf('\\') + 1)) }FileComponents" };
+                model.Fragment.ComponentGroup = new ComponentGroupElement { Id = $"{ Working.RemoveIllegalCharacters(InstallDirPath.Substring(InstallDirPath.LastIndexOf('\\') + 1)) }FileComponents" };
                 model.Fragment.ComponentGroup.Components = new List<ComponentElement>();
 
                 var format = Working.GetToStringFormat(filesTree.Count);
@@ -166,8 +174,9 @@ namespace ComponentsGenerator.ViewModels
                     var component = new ComponentElement
                     {
                         Id = Working.RemoveIllegalCharacters($"IDC_{ fileName }_{ count }"),
-                        Directory = Working.RemoveBlanks($"IDD_{ componentDirectory }"),
-                        Guid = "*"
+                        Directory = Working.RemoveIllegalCharacters($"IDD_{ componentDirectory }"),
+                        Guid = "*",
+                        Win64 = ShouldPrepareX64Components ? "yes" : "no"
                     };
 
                     var file = new FileElement

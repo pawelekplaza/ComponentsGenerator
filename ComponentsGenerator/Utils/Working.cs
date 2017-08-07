@@ -62,8 +62,7 @@ namespace ComponentsGenerator.Utils
 
         public static string RemoveIllegalCharacters(string str)
         {
-            var x = Regex.Replace(RemoveBlanks(str), @"[^a-zA-Z0-9.]", "_");
-            return x;
+            return Regex.Replace(str, "[^a-zA-Z0-9._]", "_");            
         }
     }
 }

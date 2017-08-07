@@ -18,7 +18,10 @@ namespace ComponentsGenerator.Serialization
         [XmlAttribute]
         public string Guid { get; set; }
 
+        [XmlAttribute]
+        public string Win64 { get; set; }
+
         [XmlElement("File")]
-        public FileElement File { get; set; }   
+        public FileElement File { get; set; }
     }
 }

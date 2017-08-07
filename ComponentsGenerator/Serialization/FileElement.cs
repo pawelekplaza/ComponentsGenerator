@@ -22,6 +22,6 @@ namespace ComponentsGenerator.Serialization
         public string Source { get; set; }
 
         [XmlAttribute]
-        public string KeyPath { get; set; }
+        public string KeyPath { get; set; }        
     }
 }
