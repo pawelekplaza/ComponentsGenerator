@@ -23,22 +23,30 @@ namespace ComponentsGenerator.ViewModels
         public string InstallDirPath
         {
             get { return installDirPath; }
-            set { installDirPath = value; RaisePropertyChanged("InstallDirPath"); }
+            set { installDirPath = value; RaisePropertyChanged(nameof(InstallDirPath)); }
         }
 
         private string solutionDirPath;
         public string SolutionDirPath
         {
             get { return solutionDirPath; }
-            set { solutionDirPath = value; RaisePropertyChanged("SolutionDirPath"); }
+            set { solutionDirPath = value; RaisePropertyChanged(nameof(SolutionDirPath)); }
         }
 
         private bool shouldPrepareX64Components;
         public bool ShouldPrepareX64Components
         {
             get { return shouldPrepareX64Components; }
-            set { shouldPrepareX64Components = value; RaisePropertyChanged("ShouldPrepareX64Components"); }
+            set { shouldPrepareX64Components = value; RaisePropertyChanged(nameof(ShouldPrepareX64Components)); }
         }
+
+        private bool shouldGenerateGuids;
+        public bool ShouldGenerateGuids
+        {
+            get { return shouldGenerateGuids; }
+            set { shouldGenerateGuids = value; RaisePropertyChanged(nameof(ShouldGenerateGuids)); }
+        }
+
 
 
 
@@ -175,7 +183,7 @@ namespace ComponentsGenerator.ViewModels
                     {
                         Id = Working.RemoveIllegalCharacters($"IDC_{ fileName }_{ count }"),
                         Directory = Working.RemoveIllegalCharacters($"IDD_{ componentDirectory }"),
-                        Guid = "*",
+                        Guid = ShouldGenerateGuids ? Guid.NewGuid().ToString().ToUpper() : "*",
                         Win64 = ShouldPrepareX64Components ? "yes" : "no"
                     };
 
