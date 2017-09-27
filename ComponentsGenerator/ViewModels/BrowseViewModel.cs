@@ -190,7 +190,7 @@ namespace ComponentsGenerator.ViewModels
                     var file = new FileElement
                     {
                         Id = Working.RemoveIllegalCharacters($"IDF_{ fileName }_{ count }"),
-                        Name = Working.RemoveBlanks(fileName),
+                        Name = fileName,
                         DiskId = "1",
                         Source = $"$(var.SolutionDir){ Working.GetSubDirPath(InstallDirPath, filePath) }",
                         KeyPath = "yes"
